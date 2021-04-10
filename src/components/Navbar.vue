@@ -6,7 +6,7 @@
   >
     <v-app-bar-nav-icon></v-app-bar-nav-icon>
 
-    <v-toolbar-title>My Awesome App</v-toolbar-title>
+    <v-toolbar-title>Trap Scan</v-toolbar-title>
 
     <v-spacer></v-spacer>
 
