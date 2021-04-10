@@ -1,18 +1,74 @@
 <template>
-  <div class="home">
-    <img alt="Vue logo" src="../assets/Logo.vue">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
-  </div>
+<v-container fill-height fluid style="height: 80vh;">
+  <v-row align="center"
+      justify="center">
+      <v-col lg="6">
+        <!-- <v-card elevation="1" class="pa-6 rounded"> -->
+          <!-- <v-img
+            height="250"
+            class="rounded mb-8"
+            src="https://cdn.vuetifyjs.com/images/cards/cooking.png"
+          ></v-img> -->
+          <v-form :v-model="valid">
+            <v-text-field
+              v-model="email"
+              :rules="emailRules"
+              label="Email"
+              required
+            >
+              <v-icon slot="prepend">
+                mdi-email
+              </v-icon>
+            </v-text-field>
+
+            <v-text-field
+              v-model="password"
+              :rules="passwordRules"
+              label="Password"
+              required
+              type="password"
+            >
+              <v-icon slot="prepend">
+                mdi-lock
+              </v-icon>
+            </v-text-field>
+          </v-form>
+          <v-card-actions class="mt-6 flex justify-center">
+            <v-btn
+              @click="login"
+              large
+              class="pl-10 pr-10"
+              color="primary"
+            >
+              Login
+            </v-btn>
+        </v-card-actions>
+        <!-- </v-card> -->
+      </v-col>
+  </v-row>
+</v-container>
 </template>
-
 <script>
-// @ is an alias to /src
-import HelloWorld from '@/components/HelloWorld.vue'
-
+import { mapActions } from 'vuex'
 export default {
-  name: 'Home',
-  components: {
-    HelloWorld
+  data: () => ({
+    valid: false,
+    email: '',
+    emailRules: [
+      v => !!v || 'E-mail is required',
+      v => /.+@.+/.test(v) || 'E-mail must be valid'
+    ],
+    password: '',
+    passwordRules: [
+      v => !!v || 'Password is required',
+      v => v.length > 6 || 'Password must be longer than 6 characters'
+    ]
+  }),
+  methods: {
+    login () {
+      this.signIn({ email: this.email, password: this.password })
+    },
+    ...mapActions(['signIn'])
   }
 }
 </script>
