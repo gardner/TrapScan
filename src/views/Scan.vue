@@ -1,10 +1,10 @@
 <template>
-    <qrcode-stream :key="_uid" :track="paintOutline" />
+    <qrcode-stream key="trapscan" :track="paintOutline" />
 </template>
 <script>
 export default {
   data () {
-
+    return {}
   },
   methods: {
     paintOutline (detectedCodes, ctx) {
