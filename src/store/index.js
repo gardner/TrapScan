@@ -1,14 +1,16 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import firebase from 'firebase'
-import router from '../router/'
+import router from '../router'
+// import router from '../router/'
 
 Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
     user: null,
-    error: null
+    error: null,
+    email: null
   },
   mutations: {
     setUser (state, user) {
@@ -16,24 +18,19 @@ export default new Vuex.Store({
     },
     setError (state, error) {
       state.error = error
+    },
+    setEmail (state, email) {
+      state.email = email
     }
   },
   actions: {
-    auth ({ commit }) {
-      firebase.auth().onAuthStateChanged(user => {
-        if (user) {
-          commit('setUser', user)
-          router.push('/dashboard')
-        } else {
-          commit('setUser', null)
-          router.push('/')
-        }
-      })
-    },
     signIn ({ commit }, { email, password }) {
       firebase
         .auth()
         .signInWithEmailAndPassword(email, password)
+        .then(data => {
+          router.push('/dashboard')
+        })
         .catch(error => {
           commit('setError', error)
         })
@@ -42,9 +39,23 @@ export default new Vuex.Store({
       firebase
         .auth()
         .signOut()
+        .then(data => {
+          router.push('/')
+        })
         .catch(error => {
+          alert(error)
           commit('setError', error)
         })
+    },
+    startMagicSignIn ({ commit }, { email }) {
+      commit('setEmail', email)
+    },
+    finishMagicSignIn ({ commit }, { user }) {
+      // router.push('/dashboard')
+      commit('setUser', user)
+    },
+    setError ({ commit }, { error }) {
+      commit('setError', error)
     }
   },
   modules: {
@@ -58,6 +69,9 @@ export default new Vuex.Store({
     },
     getError (state) {
       return state.error
+    },
+    signInEmail (state) {
+      return state.email
     }
   }
 })

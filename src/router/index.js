@@ -1,7 +1,9 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
+// import MagicLogin from '../views/MagicLogin.vue'
 import Dashboard from '../views/Dashboard.vue'
+import MagicLoginCallback from '../views/Passwordless/MagicLoginCallback.vue'
 
 Vue.use(VueRouter)
 
@@ -14,11 +16,11 @@ const routes = [
   {
     path: '/dashboard',
     name: 'Dashboard',
-    component: Dashboard
+    component: Dashboard,
     // component: () => import(/* webpackChunkName: "dashboard" */ '../views/Dashboard.vue'),
-    // meta: {
-    //   authRequired: true
-    // }
+    meta: {
+      authRequired: true
+    }
   },
   {
     path: '/about',
@@ -27,6 +29,11 @@ const routes = [
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
     component: () => import(/* webpackChunkName: "about" */ '../views/About.vue')
+  },
+  {
+    path: '/signIn/:email',
+    name: 'SignIn',
+    component: MagicLoginCallback
   }
 ]
 
