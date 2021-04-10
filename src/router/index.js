@@ -4,6 +4,7 @@ import Home from '../views/Home.vue'
 // import MagicLogin from '../views/MagicLogin.vue'
 import Dashboard from '../views/Dashboard.vue'
 import MagicLoginCallback from '../views/Passwordless/MagicLoginCallback.vue'
+import Scan from '../views/Scan.vue'
 
 Vue.use(VueRouter)
 
@@ -34,6 +35,14 @@ const routes = [
     path: '/signIn/:email',
     name: 'SignIn',
     component: MagicLoginCallback
+  },
+  {
+    path: '/scan',
+    name: 'Scan',
+    component: Scan,
+    meta: {
+      authRequired: true
+    }
   }
 ]
 
