@@ -5,11 +5,10 @@
     scroll-target="#scrolling-techniques-7"
   >
     <v-app-bar-nav-icon></v-app-bar-nav-icon>
-
+    <img class="logo" src="../assets/LogoPurpleClear.png" width="25" height="25">
     <v-toolbar-title>Trap Scan</v-toolbar-title>
 
     <v-spacer></v-spacer>
-
     <v-btn icon>
       <v-icon>mdi-magnify</v-icon>
     </v-btn>
@@ -42,3 +41,8 @@ export default {
   }
 }
 </script>
+<style scoped>
+.logo {
+  margin: 0px 12px;
+}
+</style>
