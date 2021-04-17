@@ -1,19 +1,19 @@
 <template>
   <v-bottom-navigation v-model="value">
-    <v-btn value="recent" to="/dashboard">
+    <v-btn value="dashboard" to="/dashboard">
       <span>Dashboard</span>
-      <v-icon>mdi-history</v-icon>
+      <v-icon>mdi-home</v-icon>
     </v-btn>
 
-    <v-btn value="favorites" to="/scan">
+    <v-btn value="scan" to="/scan">
       <span>Scan</span>
-      <v-icon>mdi-heart</v-icon>
+      <v-icon>mdi-cube-scan</v-icon>
     </v-btn>
 
-    <v-btn value="nearby">
-      <span>Profile</span>
+    <v-btn value="history">
+      <span>History</span>
 
-      <v-icon>mdi-map-marker</v-icon>
+      <v-icon>mdi-history</v-icon>
     </v-btn>
   </v-bottom-navigation>
 </template>
