@@ -33,7 +33,7 @@
               </v-icon>
             </v-text-field>
           </v-form>
-          <v-card-actions class="mt-6 flex justify-center">
+          <v-card-actions class="flex justify-center">
             <v-btn
               @click="login"
               large
@@ -41,6 +41,28 @@
               color="primary"
             >
               Login
+            </v-btn>
+        </v-card-actions>
+        <v-card-actions class="mt-8 flex justify-center">
+          <v-btn
+              width="65%"
+              @click="loginWithGooglePopUp"
+              large
+              class="pl-10 pr-10"
+              color="primary"
+            >
+              Login with Google
+            </v-btn>
+        </v-card-actions>
+        <v-card-actions class="flex justify-center">
+            <v-btn
+              width="65%"
+              @click="loginWithFacebook"
+              large
+              class="pl-10 pr-10"
+              color="primary"
+            >
+              Login with Facebook
             </v-btn>
         </v-card-actions>
         <!-- </v-card> -->
@@ -68,7 +90,13 @@ export default {
     login () {
       this.signIn({ email: this.email, password: this.password })
     },
-    ...mapActions(['signIn'])
+    loginWithGooglePopUp () {
+      this.$store.dispatch('loginWithGooglePopUp')
+    },
+    loginWithFacebook () {
+      console.log('Ew facebook')
+    },
+    ...mapActions(['signIn, loginWithGooglePopUp'])
   }
 }
 </script>

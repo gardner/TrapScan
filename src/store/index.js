@@ -1,11 +1,8 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import firebase from 'firebase'
-import router from '../router'
-// import router from '../router/'
 
 Vue.use(Vuex)
-
 export default new Vuex.Store({
   state: {
     user: null,
@@ -28,10 +25,8 @@ export default new Vuex.Store({
       firebase
         .auth()
         .signInWithEmailAndPassword(email, password)
-        .then(data => {
-          router.push('/dashboard')
-        })
         .catch(error => {
+          alert(error)
           commit('setError', error)
         })
     },
@@ -39,10 +34,25 @@ export default new Vuex.Store({
       firebase
         .auth()
         .signOut()
-        .then(data => {
-          router.push('/')
-        })
         .catch(error => {
+          alert(error)
+          commit('setError', error)
+        })
+    },
+    loginWithGooglePopUp ({ commit }) {
+      var provider = new firebase.auth.GoogleAuthProvider()
+      firebase.auth()
+        .signInWithPopup(provider)
+        .catch((error) => {
+          alert(error)
+          commit('setError', error)
+        })
+    },
+    loginWithGoogleRedirect ({ commit }) {
+      var provider = new firebase.auth.GoogleAuthProvider()
+      firebase.auth()
+        .signInWithPopup(provider)
+        .catch((error) => {
           alert(error)
           commit('setError', error)
         })
@@ -51,11 +61,13 @@ export default new Vuex.Store({
       commit('setEmail', email)
     },
     finishMagicSignIn ({ commit }, { user }) {
-      // router.push('/dashboard')
       commit('setUser', user)
     },
     setError ({ commit }, { error }) {
       commit('setError', error)
+    },
+    setUser ({ commit }, { user }) {
+      commit('setUser', user)
     }
   },
   modules: {

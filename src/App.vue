@@ -16,6 +16,7 @@
 import { mapGetters } from 'vuex'
 import Navbar from './components/Navbar'
 import BottomNav from './components/BottomNav'
+import firebase from 'firebase'
 export default {
   name: 'App',
   components: {
@@ -25,6 +26,19 @@ export default {
   data: () => ({
     //
   }),
+  created () {
+    firebase.auth().onAuthStateChanged(user => {
+      console.log('State Changed! User => ' + user)
+      this.$store.dispatch('setUser', { user })
+      if (user) {
+        // User - go to dashboard
+        this.$router.push('/dashboard').catch(() => {})
+      } else {
+        // No user, redirect to login
+        this.$router.push('/').catch(() => {})
+      }
+    })
+  },
   computed: {
     ...mapGetters(['getUser', 'isUserAuth'])
   }
