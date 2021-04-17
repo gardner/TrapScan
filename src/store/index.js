@@ -51,7 +51,7 @@ export default new Vuex.Store({
     loginWithGoogleRedirect ({ commit }) {
       var provider = new firebase.auth.GoogleAuthProvider()
       firebase.auth()
-        .signInWithPopup(provider)
+        .signInWithRedirect(provider)
         .catch((error) => {
           alert(error)
           commit('setError', error)

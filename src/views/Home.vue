@@ -71,7 +71,6 @@
 </v-container>
 </template>
 <script>
-import { mapActions } from 'vuex'
 export default {
   data: () => ({
     valid: false,
@@ -88,15 +87,14 @@ export default {
   }),
   methods: {
     login () {
-      this.signIn({ email: this.email, password: this.password })
+      this.$store.dispatch('signIn', { email: this.email, password: this.password })
     },
     loginWithGooglePopUp () {
       this.$store.dispatch('loginWithGooglePopUp')
     },
     loginWithFacebook () {
       console.log('Ew facebook')
-    },
-    ...mapActions(['signIn, loginWithGooglePopUp'])
+    }
   }
 }
 </script>
