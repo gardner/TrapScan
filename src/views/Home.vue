@@ -93,7 +93,7 @@ export default {
       this.$store.dispatch('loginWithGooglePopUp')
     },
     loginWithFacebook () {
-      console.log('Ew facebook')
+      this.$store.dispatch('loginWithFacebookPopUp')
     }
   }
 }

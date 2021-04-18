@@ -57,6 +57,16 @@ export default new Vuex.Store({
           commit('setError', error)
         })
     },
+    loginWithFacebookPopUp ({ commit }) {
+      var provider = new firebase.auth.FacebookAuthProvider()
+      firebase
+        .auth()
+        .signInWithPopup(provider)
+        .catch((error) => {
+          alert(error)
+          commit('setError', error)
+        })
+    },
     startMagicSignIn ({ commit }, { email }) {
       commit('setEmail', email)
     },
