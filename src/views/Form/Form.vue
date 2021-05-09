@@ -93,7 +93,7 @@
           <EightNotes></EightNotes>
         </v-stepper-content>
 
-        <v-stepper-content step="8">
+        <v-stepper-content step="9">
           <Confirmation></Confirmation>
         </v-stepper-content>
       </v-stepper-items>

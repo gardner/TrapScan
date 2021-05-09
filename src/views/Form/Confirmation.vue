@@ -40,11 +40,12 @@ export default {
       body: 'bar',
       userId: 1
     })
-      .then(function (response) {
+      .then((response) => {
+        console.log(response)
         this.success = true
         this.loading = false
       })
-      .catch(function (error) {
+      .catch((error) => {
         this.success = false
         this.loading = false
         console.log(error)
