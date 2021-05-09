@@ -5,6 +5,7 @@ import Home from '../views/Home.vue'
 import Dashboard from '../views/Dashboard.vue'
 import MagicLoginCallback from '../views/Passwordless/MagicLoginCallback.vue'
 import Scan from '../views/Scan.vue'
+import Form from '../views/Form/Form.vue'
 
 Vue.use(VueRouter)
 
@@ -40,6 +41,14 @@ const routes = [
     path: '/scan',
     name: 'Scan',
     component: Scan,
+    meta: {
+      authRequired: true
+    }
+  },
+  {
+    path: '/form',
+    name: 'Form',
+    component: Form,
     meta: {
       authRequired: true
     }

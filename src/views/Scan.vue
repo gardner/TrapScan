@@ -1,19 +1,28 @@
 <template>
   <div>
-    <p class="decode-result">Last result: <b>{{ result }}</b></p>
-    <qrcode-stream key="trapscan" :camera="camera" @decode="onDecode" @init="onInit" :track="paintOutline">
-    <div v-if="validationSuccess" class="validation-success">
-      This is a URL
-    </div>
+    <v-btn elevation="2" @click="goToForm">Go to Form</v-btn>
+    <p class="decode-result">
+      Last result: <b>{{ result }}</b>
+    </p>
+    <qrcode-stream
+      key="trapscan"
+      :camera="camera"
+      @decode="onDecode"
+      @init="onInit"
+      :track="paintOutline"
+    >
+      <div v-if="validationSuccess" class="validation-success">
+        This is a URL
+      </div>
 
-    <div v-if="validationFailure" class="validation-failure">
-      This is NOT a URL!
-    </div>
+      <div v-if="validationFailure" class="validation-failure">
+        This is NOT a URL!
+      </div>
 
-    <div v-if="validationPending" class="validation-pending">
-      Long validation in progress...
-    </div>
-  </qrcode-stream>
+      <div v-if="validationPending" class="validation-pending">
+        Long validation in progress...
+      </div>
+    </qrcode-stream>
   </div>
 </template>
 <script>
@@ -27,8 +36,7 @@ export default {
   },
   computed: {
     validationPending () {
-      return this.isValid === undefined &&
-        this.camera === 'off'
+      return this.isValid === undefined && this.camera === 'off'
     },
 
     validationSuccess () {
@@ -40,10 +48,11 @@ export default {
     }
   },
   methods: {
+    goToForm () {
+      this.$router.push('/form')
+    },
     onInit (promise) {
-      promise
-        .catch(console.error)
-        .then(this.resetValidationState)
+      promise.catch(console.error).then(this.resetValidationState)
     },
 
     resetValidationState () {
@@ -74,7 +83,7 @@ export default {
     },
 
     timeout (ms) {
-      return new Promise(resolve => {
+      return new Promise((resolve) => {
         window.setTimeout(resolve, ms)
       })
     },
@@ -97,7 +106,9 @@ export default {
 
     paintBoundingBox (detectedCodes, ctx) {
       for (const detectedCode of detectedCodes) {
-        const { boundingBox: { x, y, width, height } } = detectedCode
+        const {
+          boundingBox: { x, y, width, height }
+        } = detectedCode
 
         ctx.lineWidth = 2
         ctx.strokeStyle = '#007bff'
@@ -112,7 +123,10 @@ export default {
         const centerX = boundingBox.x + boundingBox.width / 2
         const centerY = boundingBox.y + boundingBox.height / 2
 
-        const fontSize = Math.max(12, 50 * boundingBox.width / ctx.canvas.width)
+        const fontSize = Math.max(
+          12,
+          (50 * boundingBox.width) / ctx.canvas.width
+        )
         console.log(boundingBox.width, ctx.canvas.width)
 
         ctx.font = `bold ${fontSize}px sans-serif`
@@ -137,7 +151,7 @@ export default {
   width: 100%;
   height: 100%;
 
-  background-color: rgba(255, 255, 255, .8);
+  background-color: rgba(255, 255, 255, 0.8);
   text-align: center;
   font-weight: bold;
   font-size: 1.4rem;
