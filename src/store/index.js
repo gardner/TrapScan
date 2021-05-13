@@ -65,7 +65,8 @@ export default new Vuex.Store({
       // Navigate back to last step
       state.form_navigation_stack.pop()
       // Reset the form data to the last step
-      state.form = state.form_navigation_data_history[state.form_navigation_stack.length - 1]
+      state.form_navigation_data_history.pop()
+      state.form = { ...state.form_navigation_data_history[state.form_navigation_stack.length - 1] }
     },
     updateForm (state, form) {
       const currentWords = state.form.words
@@ -77,7 +78,8 @@ export default new Vuex.Store({
       }
 
       // Push the new form to the historical, this will be popped on backNavigate
-      state.form_navigation_data_history.push(state.form)
+      const formBackup = { ...state.form }
+      state.form_navigation_data_history.push(formBackup)
     }
   },
   actions: {
