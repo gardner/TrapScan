@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/precache-manifest.0b99492f8e893edae3c83dbe1efc39e6.js"
+  "/TrapScan/precache-manifest.cdbc623f717181c5546d456b3ffe5589.js"
 );
 
 workbox.core.setCacheNameDetails({prefix: "trapscan"});
